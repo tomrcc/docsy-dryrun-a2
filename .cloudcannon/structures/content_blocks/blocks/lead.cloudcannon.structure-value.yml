@@ -1,0 +1,37 @@
+label: Lead
+icon: format_size
+description: A band of large, centred text.
+value:
+  _name: blocks/lead
+  content: A short, bold statement about this page.
+  color: white
+  height: auto
+  below_navbar: false
+preview:
+  text:
+    - key: content
+    - Lead
+  subtext:
+    - Lead
+  icon: format_size
+_inputs:
+  content:
+    type: markdown
+    options:
+      bold: true
+      italic: true
+      link: true
+      format: p h1 h2
+  color:
+    type: select
+    label: Background colour
+    options:
+      values: _select_data.block_colors
+  height:
+    type: select
+    options:
+      values: _select_data.block_heights
+  below_navbar:
+    type: switch
+    label: Starts below the navbar
+    comment: Turn on for the first block on a page.

@@ -1,0 +1,16 @@
+{{/* Community links block: the two link lists from data/links.yaml, with
+editable headings. Adapted from Docsy's community_links.html. `.` is the
+block; the links are shared, so they're edited in data/links.yaml. */ -}}
+{{ $links := hugo.Data.links | default dict -}}
+<section class="row td-box td-box--white td-box--height-auto linkbox">
+  <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+    <h2 data-editable="text" data-type="span" data-prop="user_heading">{{ .user_heading }}</h2>
+    <div class="mb-3" data-editable="text" data-type="block" data-prop="user_intro">{{ .user_intro | markdownify }}</div>
+    {{ partial "community/links-list.html" (dict "links" ($links.user | default slice) "prop" "@data[links].user") -}}
+  </div>
+  <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+    <h2 data-editable="text" data-type="span" data-prop="developer_heading">{{ .developer_heading }}</h2>
+    <div class="mb-3" data-editable="text" data-type="block" data-prop="developer_intro">{{ .developer_intro | markdownify }}</div>
+    {{ partial "community/links-list.html" (dict "links" ($links.developer | default slice) "prop" "@data[links].developer") -}}
+  </div>
+</section>

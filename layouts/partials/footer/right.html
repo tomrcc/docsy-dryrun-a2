@@ -1,0 +1,2 @@
+{{/* Overrides Docsy's footer/right.html: developer links come from data/links.yaml. */ -}}
+{{ partial "footer/editable-links.html" (dict "links" (hugo.Data.links.developer | default slice) "prop" "@data[links].developer") -}}

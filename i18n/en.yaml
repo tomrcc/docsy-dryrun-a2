@@ -1,0 +1,4 @@
+# Docsy's own strings come from the theme. Strings used by the page-builder
+# block partials are repeated here: CloudCannon's Visual Editor bundles the
+# project's i18n/ but not the theme's (the theme isn't vendored).
+ui_read_more: Read more

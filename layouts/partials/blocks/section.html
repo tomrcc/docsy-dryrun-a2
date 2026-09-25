@@ -1,0 +1,11 @@
+{{/* Section block: a band of free-form markdown. Adapted from Docsy's
+blocks/section shortcode. `.` is the block. */ -}}
+{{ $color := .color | default "white" -}}
+{{ $height := .height | default "auto" -}}
+<section class="row td-box td-box--{{ $color }} td-box--height-{{ $height }}{{ if .below_navbar }} td-below-navbar{{ end }}">
+  <div class="col">
+    <div class="container{{ if .centered }} text-center{{ end }}{{ if .large_text }} h1{{ end }}" data-editable="text" data-type="block" data-prop="content">
+      {{- .content | markdownify -}}
+    </div>
+  </div>
+</section>

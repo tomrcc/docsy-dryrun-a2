@@ -1,0 +1,47 @@
+label: Section
+icon: notes
+description: A band of free-form text.
+value:
+  _name: blocks/section
+  content: Write anything here.
+  color: white
+  height: auto
+  below_navbar: false
+  centered: false
+  large_text: false
+preview:
+  text:
+    - key: content
+    - Section
+  subtext:
+    - Section
+  icon: notes
+_inputs:
+  content:
+    type: markdown
+    options:
+      bold: true
+      italic: true
+      link: true
+      bulletedlist: true
+      numberedlist: true
+      format: p h2 h3
+  color:
+    type: select
+    label: Background colour
+    options:
+      values: _select_data.block_colors
+  height:
+    type: select
+    options:
+      values: _select_data.block_heights
+  below_navbar:
+    type: switch
+    label: Starts below the navbar
+    comment: Turn on for the first block on a page.
+  centered:
+    type: switch
+    label: Centre the text
+  large_text:
+    type: switch
+    label: Large text

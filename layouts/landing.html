@@ -1,0 +1,18 @@
+{{/* Page-builder layout: home, About, Community and any landing page an
+editor adds. Each content_blocks item names its partial in _name. */ -}}
+{{ define "main" -}}
+{{ if isset .Params "content_blocks" -}}
+<div class="td-page-builder" data-editable="array" data-prop="content_blocks" data-component-key="_name">
+  {{- range $i, $block := .Params.content_blocks }}
+  <div id="td-block-{{ add $i 1 }}" class="td-page-builder__block" data-editable="array-item" data-id="{{ ._name }}" data-component="{{ ._name }}">
+    {{- partial ._name . -}}
+  </div>
+  {{- end }}
+</div>
+{{ end -}}
+{{ with .Content -}}
+<div class="td-content container py-5" data-editable="text" data-type="block" data-prop="@content">
+  {{ . }}
+</div>
+{{- end }}
+{{ end -}}

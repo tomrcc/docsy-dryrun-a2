@@ -1,0 +1,726 @@
+paths:
+  static: static
+  uploads: static/images
+
+timezone: Etc/UTC
+
+# Matches Hugo's Goldmark settings in hugo.yaml (unsafe: true,
+# parser.attribute.block: true, Goldmark's default extensions).
+markdown:
+  engine: commonmark
+  options:
+    gfm: true
+    html: true
+    linkify: true
+    table: true
+    strikethrough: true
+    subscript: false
+    superscript: false
+    heading_ids: false
+    breaks: false
+    xhtml: false
+    attributes: true
+    typographer: false
+    treat_indentation_as_code: true
+    escape_snippets_in_code_blocks: true
+    attribute_elements:
+      h1: none
+      h2: none
+      h3: none
+      h4: none
+      h5: none
+      h6: none
+      blockquote: below
+      hr: below
+      ol: below
+      ul: below
+      p: below
+      table: below
+      img: none
+
+collection_groups:
+  - heading: Content
+    collections:
+      - pages
+      - docs
+      - blog
+  - heading: Site data
+    collections:
+      - data
+
+collections_config:
+  pages:
+    name: Pages
+    path: content
+    glob:
+      - '**/*.md'
+      - '!docs/**'
+      - '!blog/**'
+      - '!search.md'
+    url: /[full_slug]/
+    icon: wysiwyg
+    description: The home page, landing pages built from blocks, and standalone pages.
+    _enabled_editors:
+      - visual
+      - content
+      - data
+    schemas:
+      default:
+        path: .cloudcannon/schemas/landing.md
+        name: Landing page
+        icon: dashboard
+        new_preview_url: /about/
+        _enabled_editors:
+          - visual
+          - data
+      page:
+        path: .cloudcannon/schemas/page.md
+        name: Text page
+        icon: article
+        new_preview_url: /privacy/
+    add_options:
+      - name: Landing page
+        schema: default
+        icon: dashboard
+      - name: Text page
+        schema: page
+        icon: article
+    create:
+      path: '[relative_base_path]/{title|slugify}.[ext]'
+
+  docs:
+    name: Docs
+    path: content/docs
+    url: /docs/[full_slug]/
+    icon: docs
+    description: Documentation pages. Each folder is a section with its own landing page.
+    _enabled_editors:
+      - visual
+      - content
+      - data
+    schemas:
+      default:
+        path: .cloudcannon/schemas/doc.md
+        name: Docs page
+        icon: description
+        new_preview_url: /docs/overview/
+      section:
+        path: .cloudcannon/schemas/doc-section.md
+        name: Docs section
+        icon: folder
+        new_preview_url: /docs/reference/
+        create:
+          path: '[relative_base_path]/{title|slugify}/_index.[ext]'
+    add_options:
+      - name: Docs page
+        schema: default
+        icon: description
+      - name: Docs section
+        schema: section
+        icon: folder
+    create:
+      path: '[relative_base_path]/{title|slugify}.[ext]'
+    sort_options:
+      - key: weight
+        order: ascending
+      - key: title
+        order: ascending
+
+  blog:
+    name: Blog
+    path: content/blog
+    url: /blog/[full_slug]/
+    icon: event_available
+    description: News and release posts, newest first. Each post is a folder holding the post and its images.
+    _enabled_editors:
+      - content
+      - visual
+      - data
+    schemas:
+      default:
+        path: .cloudcannon/schemas/post.md
+        name: Blog post
+        icon: event_available
+        new_preview_url: /blog/news/second-post/
+      section:
+        path: .cloudcannon/schemas/blog-section.md
+        name: Blog section
+        icon: folder
+        create:
+          path: '[relative_base_path]/{title|slugify}/_index.[ext]'
+    add_options:
+      - name: Blog post
+        schema: default
+        icon: event_available
+        editor: content
+    create:
+      path: '[relative_base_path]/{title|slugify}/index.[ext]'
+    sort_options:
+      - key: date
+        order: descending
+    # Posts are page bundles: images uploaded while editing a post go into
+    # the post's own folder and are stored relative to it.
+    _editables:
+      content:
+        paths:
+          uploads: content/blog/[relative_base_path]
+          uploads_use_relative_path: true
+
+  data:
+    name: Site data
+    path: data
+    glob:
+      - '*.yaml'
+    disable_url: true
+    icon: settings
+    description: Text shared by every page, and the tags and categories editors can pick.
+    _enabled_editors:
+      - data
+    disable_add: true
+    disable_add_folder: true
+    disable_file_actions: true
+
+data_config:
+  links:
+    path: data/links.yaml
+  footer:
+    path: data/footer.yaml
+  tags:
+    path: data/tags.yaml
+  categories:
+    path: data/categories.yaml
+
+file_config:
+  - glob: data/tags.yaml
+    _inputs:
+      $:
+        type: array
+        label: Tags
+        comment: The tags editors can pick on docs pages and blog posts.
+      $[*]:
+        type: text
+        label: Tag
+  - glob: data/categories.yaml
+    _inputs:
+      $:
+        type: array
+        label: Categories
+        comment: The categories editors can pick on docs pages and blog posts.
+      $[*]:
+        type: text
+        label: Category
+  - glob: data/links.yaml
+    _inputs:
+      $:
+        type: object
+        label: Links
+        options:
+          preview:
+            icon: link
+      user:
+        type: array
+        label: User links
+        comment: Shown on the left of the footer and in the first list on the Community page.
+        options:
+          structures: _structures.community_links
+      developer:
+        type: array
+        label: Developer links
+        comment: Shown on the right of the footer and in the second list on the Community page.
+        options:
+          structures: _structures.community_links
+  - glob: data/footer.yaml
+    _inputs:
+      $:
+        type: object
+        label: Footer
+        options:
+          preview:
+            icon: bottom_navigation
+      copyright_authors:
+        type: text
+        label: Copyright holder
+        comment: Shown after © and the years. Markdown links work.
+      copyright_from_year:
+        type: text
+        label: Copyright start year
+        comment: The footer shows this year to the current year.
+      privacy_policy_url:
+        type: url
+        label: Privacy policy link
+        comment: Leave empty to hide the link.
+
+_inputs:
+  title:
+    type: text
+  linkTitle:
+    type: text
+    label: Link title
+    comment: A shorter title for the navigation and breadcrumbs. Optional.
+  description:
+    type: textarea
+    comment: Shown under the page title and in search results.
+  weight:
+    type: number
+    comment: Position in the navigation. Lower numbers come first.
+  date:
+    type: datetime
+    instance_value: NOW
+  author:
+    type: text
+  # Taxonomies: the options come from data/tags.yaml and data/categories.yaml.
+  tags:
+    type: multiselect
+    comment: Add new tags under Site data → Tags.
+    options:
+      values: data.tags
+  categories:
+    type: multiselect
+    comment: Add new categories under Site data → Categories.
+    options:
+      values: data.categories
+  draft:
+    type: switch
+    comment: Draft pages aren't published and can't be previewed in the Visual Editor.
+  menu:
+    type: object
+    label: Navigation menu
+    comment: Add the page to the top navigation.
+    options:
+      structures: _structures.menu
+      preview:
+        icon: menu
+  # menu.main — its weight uses the weight input above.
+  main:
+    type: object
+    label: Main menu
+    options:
+      preview:
+        icon: menu
+  content_blocks:
+    type: array
+    label: Content blocks
+    options:
+      structures:
+        values_from_glob:
+          - /.cloudcannon/structures/content_blocks/**/*.cloudcannon.structure-value.yml
+  # Hugo routing and theme keys: changing them moves or restyles pages.
+  layout:
+    hidden: true
+  type:
+    hidden: true
+  aliases:
+    hidden: true
+  resources:
+    hidden: true
+  params:
+    hidden: true
+  build:
+    hidden: true
+  cascade:
+    hidden: true
+
+_select_data:
+  block_colors:
+    - primary
+    - secondary
+    - success
+    - info
+    - warning
+    - danger
+    - light
+    - dark
+    - white
+  block_heights:
+    - auto
+    - min
+    - med
+    - max
+    - full
+  image_anchors:
+    - smart
+    - top
+    - center
+    - bottom
+    - left
+    - right
+  button_colors:
+    - primary
+    - secondary
+    - success
+    - info
+    - warning
+    - danger
+    - light
+    - dark
+  icons:
+    - id: ''
+      name: No icon
+    - id: fa-solid fa-lightbulb
+      name: Lightbulb
+    - id: fa-solid fa-book
+      name: Book
+    - id: fa-solid fa-rocket
+      name: Rocket
+    - id: fa-solid fa-pen-to-square
+      name: Edit
+    - id: fa-solid fa-i-cursor
+      name: Text cursor
+    - id: fa-solid fa-sliders
+      name: Sliders
+    - id: fa-solid fa-envelope
+      name: Envelope
+    - id: fa-solid fa-circle-info
+      name: Info
+    - id: fa-solid fa-arrow-right
+      name: Arrow right
+    - id: fa-brands fa-github
+      name: GitHub
+    - id: fa-brands fa-slack
+      name: Slack
+    - id: fa-brands fa-mastodon
+      name: Mastodon
+    - id: fa-brands fa-stack-overflow
+      name: Stack Overflow
+    - id: fa-brands fa-x-twitter
+      name: X
+
+_structures:
+  menu:
+    values:
+      - label: Main menu
+        icon: menu
+        value:
+          main:
+            weight: 50
+  buttons:
+    values:
+      - label: Button
+        icon: ads_click
+        value:
+          text: Button text
+          url: /
+          color: primary
+          icon: ''
+          new_tab: false
+        preview:
+          text:
+            - key: text
+          subtext:
+            - key: url
+          icon: ads_click
+        _inputs:
+          text:
+            type: text
+          url:
+            type: url
+          color:
+            type: select
+            options:
+              values: _select_data.button_colors
+          icon:
+            type: select
+            comment: A Font Awesome icon after the text. Type any Font Awesome class to use another.
+            options:
+              allow_create: true
+              values: _select_data.icons
+              value_key: id
+              preview:
+                text:
+                  - key: name
+          new_tab:
+            type: switch
+            label: Open in a new tab
+  features:
+    values:
+      - label: Feature
+        icon: star
+        value:
+          title: Feature title
+          icon: fa-solid fa-lightbulb
+          content: A sentence about this feature.
+          url: ''
+          url_text: ''
+        preview:
+          text:
+            - key: title
+          subtext:
+            - key: content
+          icon: star
+        _inputs:
+          title:
+            type: text
+          icon:
+            type: select
+            comment: A Font Awesome icon. Type any Font Awesome class to use another.
+            options:
+              allow_create: true
+              values: _select_data.icons
+              value_key: id
+              preview:
+                text:
+                  - key: name
+          content:
+            type: markdown
+            options:
+              bold: true
+              italic: true
+              link: true
+          url:
+            type: url
+            label: Link
+            comment: Leave empty for no link.
+          url_text:
+            type: text
+            label: Link text
+            comment: Defaults to "Read more".
+  community_links:
+    values:
+      - label: Link
+        icon: link
+        value:
+          name: Link name
+          url: https://example.org
+          icon: fa-solid fa-envelope
+          desc: What people find there
+        preview:
+          text:
+            - key: name
+          subtext:
+            - key: url
+          icon: link
+        _inputs:
+          name:
+            type: text
+            comment: Shown as the footer icon's tooltip and in the Community page list.
+          url:
+            type: url
+          icon:
+            type: select
+            comment: A Font Awesome icon. Type any Font Awesome class to use another.
+            options:
+              allow_create: true
+              values: _select_data.icons
+              value_key: id
+              preview:
+                text:
+                  - key: name
+          desc:
+            type: text
+            label: Description
+            comment: Shown on the Community page.
+
+_editables:
+  content:
+    blockquote: true
+    bold: true
+    italic: true
+    strike: true
+    link: true
+    bulletedlist: true
+    numberedlist: true
+    format: p h2 h3 h4 h5 h6 pre
+    code_inline: true
+    code_block: true
+    horizontalrule: true
+    table: true
+    image: true
+    snippet: true
+    undo: true
+    redo: true
+    removeformat: true
+
+_snippets:
+  alert:
+    template: hugo_paired_markdown_shortcode_named_args
+    inline: false
+    preview:
+      text:
+        - key: title
+        - Alert
+      subtext:
+        - key: color
+      icon: warning
+    picker_preview:
+      text: Alert
+      icon: warning
+    definitions:
+      shortcode_name: alert
+      content_key: alert_content
+      named_args:
+        - editor_key: title
+          type: string
+          optional: true
+          remove_empty: true
+        - editor_key: color
+          type: string
+          optional: true
+          remove_empty: true
+    _inputs:
+      title:
+        type: text
+        comment: Optional heading.
+      color:
+        type: select
+        comment: Defaults to primary.
+        options:
+          values: _select_data.button_colors
+      alert_content:
+        type: markdown
+        label: Text
+  pageinfo:
+    template: hugo_paired_markdown_shortcode_named_args
+    inline: false
+    preview:
+      text:
+        - Page info
+      subtext:
+        - key: color
+      icon: info
+    picker_preview:
+      text: Page info
+      icon: info
+    definitions:
+      shortcode_name: pageinfo
+      content_key: pageinfo_content
+      named_args:
+        - editor_key: color
+          type: string
+          optional: true
+          remove_empty: true
+    _inputs:
+      color:
+        type: select
+        comment: Defaults to primary.
+        options:
+          values: _select_data.button_colors
+      pageinfo_content:
+        type: markdown
+        label: Text
+  imgproc:
+    template: hugo_paired_shortcode_positional_args
+    inline: false
+    preview:
+      text:
+        - key: caption
+        - Image
+      subtext:
+        - key: image
+      icon: image
+    picker_preview:
+      text: Processed image
+      icon: image
+    definitions:
+      shortcode_name: imgproc
+      content_key: caption
+      positional_args:
+        - editor_key: image
+          type: string
+        - editor_key: command
+          type: string
+          default: Fit
+        - editor_key: size
+          type: string
+          default: 800x600
+    _inputs:
+      image:
+        type: text
+        comment: The name of an image in this post's folder, e.g. sunset (the extension is optional).
+      command:
+        type: select
+        options:
+          values:
+            - Crop
+            - Fill
+            - Fit
+            - Resize
+      size:
+        type: text
+        comment: Width x height in pixels, e.g. 500x300.
+      caption:
+        type: markdown
+        label: Caption
+  tabpane:
+    snippet: '{{< tabpane [[tabpane_args]] >}}[[tabs]]{{< /tabpane >}}'
+    inline: false
+    preview:
+      text:
+        - Tabs
+      subtext:
+        - key: tabs.0.header
+      icon: tab
+    picker_preview:
+      text: Tabs
+      icon: tab
+    params:
+      tabpane_args:
+        parser: key_values
+        options:
+          models:
+            - editor_key: text
+              type: boolean
+              default: true
+          format:
+            root_value_delimiter: '='
+            root_pair_delimiter:
+              - ' '
+            string_boundary:
+              - '"'
+            allow_booleans: true
+      tabs:
+        parser: repeating
+        options:
+          snippet: '{{% tab [[tab_args]] %}}[[tab_content]]{{% /tab %}}'
+          editor_key: tabs
+          default_length: 2
+          style:
+            output: block
+            between: "\n"
+            block:
+              leading: "\n"
+              trailing: "\n"
+      tab_args:
+        parser: key_values
+        options:
+          models:
+            - editor_key: header
+              type: string
+          format:
+            root_value_delimiter: '='
+            string_boundary:
+              - '"'
+      tab_content:
+        parser: content
+        options:
+          editor_key: tab_content
+          style:
+            block:
+              leading: "\n"
+              trailing: "\n"
+    _inputs:
+      text:
+        type: switch
+        label: Markdown tabs
+        comment: Leave on. Turn off only for tabs that each hold a single code block.
+      tabs:
+        type: array
+        options:
+          structures: _structures.tabs
+      header:
+        type: text
+        label: Tab name
+      tab_content:
+        type: markdown
+        label: Tab content
+    _structures:
+      tabs:
+        values:
+          - label: Tab
+            icon: tab
+            value:
+              header: Tab
+              tab_content: ''
+            preview:
+              text:
+                - key: header
+              icon: tab

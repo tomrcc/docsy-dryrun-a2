@@ -1,0 +1,27 @@
+{
+  "name": "docsy-starter",
+  "version": "0.1.0",
+  "description": "A Docsy documentation site set up for editing in CloudCannon.",
+  "author": "The Docsy Starter Authors",
+  "license": "Apache-2.0",
+  "workspaces": [
+    "packages/hugoautogen"
+  ],
+  "scripts": {
+    "build": "hugo --cleanDestinationDir --minify",
+    "build:preview": "hugo --cleanDestinationDir -e dev -DF --baseURL \"${DEPLOY_PRIME_URL:-/}\"",
+    "serve": "hugo server -e dev -DF",
+    "clean": "rm -Rf public/* resources",
+    "update:docsy": "hugo mod get -u github.com/google/docsy/theme && hugo mod tidy && hugo mod npm pack && npm pkg set 'name=\"@docsy/hugoautogen\"' private=true --json --prefix packages/hugoautogen && npm install"
+  },
+  "devDependencies": {
+    "autoprefixer": "10.5.4",
+    "postcss-cli": "11.0.1",
+    "rtlcss": "4.3.0",
+    "sass-embedded": "1.103.1"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "private": true
+}

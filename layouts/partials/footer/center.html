@@ -1,0 +1,27 @@
+{{/* Overrides Docsy's footer/center.html: copyright and privacy link come
+from data/footer.yaml so editors can change them. */ -}}
+{{ $footer := hugo.Data.footer | default dict -}}
+{{ $fromYear := strings.TrimSpace (string ($footer.copyright_from_year | default "")) -}}
+{{ $toYear := string now.Year -}}
+<span class="td-footer__copyright">&copy;
+  {{ with $fromYear -}}
+    {{ if ne . $toYear }}{{ . }}&ndash;{{ end -}}
+  {{ end -}}
+  {{ $toYear }}
+  <span class="td-footer__authors" data-editable="text" data-type="text" data-prop="@data[footer].copyright_authors">
+    {{- $footer.copyright_authors | default (printf "%s Authors" site.Title) | markdownify -}}
+  </span>
+</span>
+{{- with T "footer_all_rights_reserved" }}
+  <span class="td-footer__all_rights_reserved">{{ . }}</span>
+{{- end }}
+
+{{ with $footer.privacy_policy_url -}}
+  <span class="ms-2"><a href="{{ . | relURL }}">{{ T "footer_privacy_policy" }}</a></span>
+{{- end -}}
+
+{{ if site.Params.ui.footer_about_enable -}}
+  {{ with site.GetPage "about" -}}
+    <p class="td-footer__about mt-2"><a href="{{ .RelPermalink }}">{{ .Title }}</a></p>
+  {{- end -}}
+{{ end -}}

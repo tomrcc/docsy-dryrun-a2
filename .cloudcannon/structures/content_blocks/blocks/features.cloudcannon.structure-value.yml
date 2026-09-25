@@ -1,0 +1,24 @@
+label: Features
+icon: view_column
+description: A row of up to three features, each with an icon, title and text.
+value:
+  _name: blocks/features
+  color: primary
+  features: []
+preview:
+  text:
+    - key: features.0.title
+    - Features
+  subtext:
+    - Features
+  icon: view_column
+_inputs:
+  color:
+    type: select
+    label: Background colour
+    options:
+      values: _select_data.block_colors
+  features:
+    type: array
+    options:
+      structures: _structures.features

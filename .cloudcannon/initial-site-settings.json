@@ -1,0 +1,18 @@
+{
+  "ssg": "hugo",
+  "mode": "hosted",
+  "build": {
+    "install_command": "npm ci",
+    "build_command": "npm run build",
+    "output_path": "public",
+    "hugo_version": "0.166.0",
+    "node_version": "file",
+    "environment_variables": [
+      {
+        "key": "HUGO_CACHEDIR",
+        "value": "/usr/local/__site/src/.hugo_cache/"
+      }
+    ],
+    "preserved_paths": "node_modules/,resources/,.hugo_cache/"
+  }
+}

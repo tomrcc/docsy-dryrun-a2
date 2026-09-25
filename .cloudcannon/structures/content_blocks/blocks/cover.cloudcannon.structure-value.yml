@@ -1,0 +1,71 @@
+label: Cover
+icon: panorama
+description: A full-width hero with a background image, title and buttons. Put it first on the page.
+value:
+  _name: blocks/cover
+  title: Page title
+  subtitle: ""
+  description: A sentence or two about the page.
+  image: ""
+  image_anchor: smart
+  height: max
+  below_navbar: true
+  color: dark
+  buttons: []
+  link_down: false
+  byline: ""
+preview:
+  text:
+    - key: title
+    - Cover
+  subtext:
+    - Cover
+  image:
+    - key: image
+  icon: panorama
+_inputs:
+  title:
+    type: text
+  subtitle:
+    type: text
+    comment: Shown in capitals under the title. Leave empty to hide.
+  description:
+    type: markdown
+    options:
+      bold: true
+      italic: true
+      link: true
+  image:
+    type: image
+    label: Background image
+  image_anchor:
+    type: select
+    label: Image focus
+    comment: Which part of the image stays visible when it's cropped.
+    options:
+      values: _select_data.image_anchors
+  height:
+    type: select
+    options:
+      values: _select_data.block_heights
+  below_navbar:
+    type: switch
+    label: Starts below the navbar
+    comment: Turn on for the first block on a page.
+  color:
+    type: select
+    label: Background colour
+    comment: Shown when there's no image.
+    options:
+      values: _select_data.block_colors
+  buttons:
+    type: array
+    options:
+      structures: _structures.buttons
+  link_down:
+    type: switch
+    label: Show down arrow
+    comment: An arrow that scrolls to the next block.
+  byline:
+    type: text
+    label: Image credit

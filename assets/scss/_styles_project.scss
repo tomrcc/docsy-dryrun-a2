@@ -1,0 +1,65 @@
+/*
+Project-specific styles. For details, see:
+https://www.docsy.dev/docs/content/lookandfeel/#project-style-files
+*/
+
+// Dark mode enhancements
+@import 'td/color-adjustments-dark';
+@import 'td/code-dark';
+@import 'td/gcs-search-dark';
+@import 'td/extra/buttons';
+@import 'td/extra/main-container';
+
+// Example of color tuning
+
+.td-box--primary {
+  // TODO: rework the td-box--* classes so that they don't override `color`;
+  // otherwise we can't use Bootstrap's CSS variables:
+  // --bs-link-color: $color !important;
+  // --bs-link-color-rgb: red !important;
+  a {
+    color: tint-color($primary, 80%) !important;
+  }
+}
+
+// Cover block background images. The cover partial sets these custom
+// properties inline so the block needs no per-instance <style> element.
+.td-cover-block--has-image {
+  background-image: var(--td-cover-image-sm);
+
+  @media only screen and (min-width: 1200px) {
+    background-image: var(--td-cover-image-lg);
+  }
+}
+
+// The markdown body sits in its own .td-content wrapper (the CloudCannon
+// @content region), so Docsy's `.td-content > p`, `> h2` … rules still match
+// it. On pages without a left sidebar, cancel the 80% centring that would
+// otherwise apply twice.
+.td-no-left-sidebar .td-main > div > main .td-content .td-content--body {
+  max-width: none;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+// Inside the body wrapper the first heading or alert is now a :first-child,
+// which Docsy's `:not(:first-child)` spacing rules skip. Restore the spacing
+// they had when they followed the page title.
+.td-content--body {
+  > h2:first-child {
+    margin-top: 3rem;
+  }
+
+  > .alert:first-child {
+    margin-top: 2 * $spacer;
+    margin-bottom: 2 * $spacer;
+  }
+}
+
+// Page info boxes line up with the text column (docsy-example passed these
+// classes through the shortcode's color argument; editors pick a plain colour).
+.td-content .pageinfo {
+  @extend .td-max-width-on-larger-screens;
+  margin-left: 0;
+  margin-right: 0;
+}

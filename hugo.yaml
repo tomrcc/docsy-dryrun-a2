@@ -1,0 +1,126 @@
+baseURL: https://example.com/
+title: Docsy Starter
+
+# cSpell:ignore goldmark github hugo readingtime docsy lastmod pygments catmullrom
+
+defaultContentLanguage: en
+defaultContentLanguageInSubdir: false
+
+enableRobotsTXT: true
+
+# Gives values to .Lastmod etc.
+enableGitInfo: true
+
+taxonomies:
+  tag: tags
+  category: categories
+
+imaging:
+  resampleFilter: CatmullRom
+
+languages:
+  en:
+    label: English
+    title: Docsy Starter
+    params:
+      description: A Docsy documentation site, ready to edit in CloudCannon
+
+markup:
+  goldmark:
+    parser:
+      attribute:
+        block: true
+    renderer:
+      unsafe: true
+  highlight:
+    # See a complete list of available styles at https://xyproto.github.io/splash/docs/all.html
+    style: tango
+    noClasses: false # Required for dark-mode support of code blocks
+
+# Comment out if you don't want the "print entire section" link enabled.
+outputs:
+  home: [HTML, print, RSS]
+  section: [HTML, print, RSS]
+
+# Copied from Docsy's own hugo.yaml. CloudCannon's Visual Editor loads only
+# this file, not the theme's config (the theme is a Hugo module, not
+# vendored), so every output format named above must be defined here too.
+# Keep in step with Docsy when upgrading it.
+outputFormats:
+  LLMS:
+    baseName: llms
+    isPlainText: true
+    mediaType: text/plain
+    notAlternative: true
+  print:
+    baseName: index
+    # Docsy leaves isHTML unset until https://github.com/gohugoio/hugo/issues/14381 is fixed.
+    mediaType: text/html
+    path: _print
+    permalinkable: false
+
+# Site-wide text editors change (footer links, copyright, community links)
+# lives in data/ so CloudCannon can edit it. Everything below is
+# developer-owned theme configuration.
+params:
+  taxonomy:
+    # set taxonomyCloud = [] to hide taxonomy clouds
+    taxonomyCloud: [tags, categories]
+
+    # If used, must have same length as taxonomyCloud
+    taxonomyCloudTitle: [Tag Cloud, Categories]
+
+    # set taxonomyPageHeader = [] to hide taxonomies on the page headers
+    taxonomyPageHeader: [tags, categories]
+
+  # Menu title if your navbar has a versions selector to access old versions of your site.
+  # This menu appears only if you have at least one [params.versions] set.
+  version_menu: Releases
+  archived_version: false
+  version: 0.1.0
+
+  # Set github_repo to your repository to show "Edit this page" and
+  # "Create an issue" links on docs pages.
+  # github_repo: https://github.com/USERNAME/REPOSITORY
+  github_branch: main
+
+  # Lunr.js offline search: no external service needed.
+  offlineSearch: true
+
+  # Enable syntax highlighting and copy buttons on code blocks with Prism
+  prism_syntax_highlighting: false
+
+  ui:
+    breadcrumb_disable: false
+    # Set to false if you don't want to display a logo (/assets/icons/logo.svg) in the top navbar
+    navbar_logo: true
+    # Set to true if you don't want the top navbar to be translucent when over a cover block, like on the homepage.
+    navbar_translucent_over_cover_disable: false
+    sidebar_menu_foldable: true
+    sidebar_menu_compact: false
+    sidebar_search_disable: false
+    showLightDarkModeMenu: true
+    # Shows a link to the About page in the footer.
+    footer_about_enable: true
+    # The "Feedback" section needs services.googleAnalytics.id.
+    feedback:
+      enable: false
+    readingtime:
+      enable: false
+
+module:
+  hugoVersion:
+    extended: true
+    min: 0.160.1
+  mounts:
+    - source: assets
+      target: assets
+    # Images live in static/images/ so the same /images/... path works in a
+    # plain <img> (CloudCannon's editor) and in resources.Get (the build).
+    - source: static
+      target: assets
+  imports:
+    - path: github.com/google/docsy/theme
+      disable: false
+    # CloudCannon Visual Editor support (editable regions).
+    - path: github.com/CloudCannon/editable-regions

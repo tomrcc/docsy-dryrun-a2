@@ -1,0 +1,11 @@
+{{/* Lead block: a centred band of large text. Adapted from Docsy's
+blocks/lead shortcode. `.` is the block. */ -}}
+{{ $color := .color | default "white" -}}
+{{ $height := .height | default "auto" -}}
+<section class="row td-box td-box--{{ $color }} position-relative td-box--height-{{ $height }}{{ if .below_navbar }} td-below-navbar{{ end }}">
+  <div class="col-12">
+    <div class="container text-center td-arrow-down">
+      <div class="h4 mb-0" data-editable="text" data-type="block" data-prop="content">{{ .content | markdownify }}</div>
+    </div>
+  </div>
+</section>

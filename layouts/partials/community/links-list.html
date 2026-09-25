@@ -1,0 +1,12 @@
+{{/* One list of community links from data/links.yaml, as a CloudCannon
+array region. Called with (dict "links" <array> "prop" "@data[links].user"). */ -}}
+<ul data-editable="array" data-prop="{{ .prop }}">
+{{- range .links }}
+  {{ $url := .url -}}
+  {{ $isExternal := (urls.Parse $url).IsAbs -}}
+  <li title="{{ .name }}" data-editable="array-item">
+    <a href="{{ $url | relURL }}"{{ if $isExternal }} target="_blank" rel="noopener"{{ end }}><i class="{{ .icon }}"></i> <span data-editable="text" data-type="span" data-prop="name">{{ .name }}</span></a>:
+    <span data-editable="text" data-type="span" data-prop="desc">{{ .desc }}</span>
+  </li>
+{{- end }}
+</ul>

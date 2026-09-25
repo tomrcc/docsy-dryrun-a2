@@ -1,0 +1,52 @@
+{{/* Cover block (put it first on the page — the down arrow jumps to block 2): full-width hero with background image, title, lead text
+and buttons. Adapted from Docsy's blocks/cover shortcode. `.` is the block. */ -}}
+{{ $color := .color | default "dark" -}}
+{{ $height := .height | default "max" -}}
+{{ $anchor := .image_anchor | default "smart" -}}
+{{ $style := "" -}}
+{{ with .image -}}
+  {{ $small := . -}}
+  {{ $big := . -}}
+  {{ if and (not site.Params.ENV_CLIENT) (not (hasSuffix . ".svg")) -}}
+    {{ with resources.Get . -}}
+      {{ $small = (.Fill (printf "960x540 %s" $anchor)).RelPermalink -}}
+      {{ $big = (.Fill (printf "1920x1080 %s" $anchor)).RelPermalink -}}
+    {{ end -}}
+  {{ end -}}
+  {{ $style = printf "--td-cover-image-sm: url(%s); --td-cover-image-lg: url(%s);" $small $big -}}
+{{ end -}}
+<section class="row td-cover-block td-cover-block--height-{{ $height }}{{ if .below_navbar }} td-below-navbar{{ end }}
+    {{- if not site.Params.ui.navbar_translucent_over_cover_disable }} js-td-cover{{ end }} td-overlay td-overlay--dark -bg-{{ $color }}
+    {{- with .image }} td-cover-block--has-image{{ end }}"
+  {{- with $style }} style="{{ . | safeCSS }}"{{ end }}>
+  <div class="col-12">
+    <div class="container td-overlay__inner">
+      <div class="text-center">
+        <h1 class="display-1 mt-0 mt-md-5 pb-4" data-editable="text" data-type="span" data-prop="title">{{ .title }}</h1>
+        {{ if or .subtitle site.Params.ENV_CLIENT -}}
+        <p class="display-2 text-uppercase mb-0" data-editable="text" data-type="span" data-prop="subtitle">{{ .subtitle }}</p>
+        {{ end -}}
+        <div class="pt-3 lead">
+          <div class="display-6" data-editable="text" data-type="block" data-prop="description">{{ .description | markdownify }}</div>
+          {{ if or .buttons site.Params.ENV_CLIENT -}}
+          <div class="td-cta-buttons my-5" data-editable="array" data-prop="buttons">
+            {{- range .buttons }}
+            <a class="btn btn-lg btn-{{ .color | default "primary" }} me-3 mb-4" href="{{ .url | relURL }}" data-editable="array-item"
+              {{- if .new_tab }} target="_blank" rel="noopener noreferrer"{{ end }}>
+              <span data-editable="text" data-type="span" data-prop="text">{{ .text }}</span>
+              {{- with .icon }} <i class="{{ . }} ms-2"></i>{{ end }}
+            </a>
+            {{- end }}
+          </div>
+          {{ end -}}
+          {{ if .link_down -}}
+          <a class="btn btn-link text-info td-cover-block__link-down" href="#td-block-2" aria-label="{{ T "ui_read_more" }}"><i class="fa-solid fa-circle-chevron-down" style="font-size: 400%"></i></a>
+          {{ end -}}
+        </div>
+      </div>
+    </div>
+  </div>
+  {{ with .byline -}}
+  <div class="byline">{{ . }}</div>
+  {{- end }}
+</section>

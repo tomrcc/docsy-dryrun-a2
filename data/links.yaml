@@ -1,0 +1,28 @@
+# Community links. Shown as icons in the footer and as lists on the
+# Community page. Edit them in CloudCannon under Site data → Links.
+user:
+  - name: User mailing list
+    url: https://example.org/mail
+    icon: fa-solid fa-envelope
+    desc: Discussion and help from your fellow users
+  - name: Stack Overflow
+    url: https://example.org/stack
+    icon: fa-brands fa-stack-overflow
+    desc: Practical questions and curated answers
+  - name: Mastodon
+    url: https://example.org/mastodon
+    icon: fa-brands fa-mastodon
+    desc: Follow us for the latest news
+developer:
+  - name: GitHub
+    url: https://github.com/example/docsy-starter
+    icon: fa-brands fa-github
+    desc: Development takes place here
+  - name: Slack
+    url: https://example.org/slack
+    icon: fa-brands fa-slack
+    desc: Chat with other project developers
+  - name: Developer mailing list
+    url: https://example.org/mail
+    icon: fa-solid fa-envelope
+    desc: Discuss development issues around the project
