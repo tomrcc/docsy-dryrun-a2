@@ -1,7 +1,3 @@
-# Community links. Shown as icons in the footer and as lists on the
-# Community page. Edit them in CloudCannon under Site data → Links.
-# Each language has its own copy of the lists: keep the URLs and icons in
-# step when you add or remove a link.
 en:
   user:
     - name: User mailing list
@@ -43,6 +39,10 @@ fr:
       url: https://example.org/mastodon
       icon: fa-brands fa-mastodon
       desc: Suivez-nous pour les dernières nouvelles
+    - name: Link name
+      url: https://example.org
+      icon: fa-solid fa-envelope
+      desc: What people find there
   developer:
     - name: GitHub
       url: https://github.com/example/docsy-starter
@@ -56,6 +56,10 @@ fr:
       url: https://example.org/mail
       icon: fa-solid fa-envelope
       desc: Discutez des questions de développement du projet
+    - name: Link name
+      url: https://example.org
+      icon: fa-solid fa-envelope
+      desc: What people find there
 de:
   user:
     - name: Mailingliste für Nutzer
