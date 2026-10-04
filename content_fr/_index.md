@@ -11,7 +11,7 @@ menu:
 params: {}
 content_blocks:
   - _name: blocks/cover
-    title: Bienvenue sur le Docsy Starter TE$T
+    title: Bienvenue sur le Docsy Starter TE$T TOM
     subtitle:
     description: Une documentation que toute votre équipe peut modifier —
       directement dans la page, dans CloudCannon.
@@ -47,7 +47,7 @@ content_blocks:
       - title: Modifier sur place
         icon: fa-solid fa-i-cursor
         content: Cliquez sur le texte de n'importe quelle page pour le changer. Vos
-          modifications s'affichent au fil de la saisie. CHANGED HERE!
+          modifications s'affichent au fil de la saisie. CHANGED HERE! re-render
         url: /docs/getting-started/
         url_text: Comment fonctionne la modification
       - title: Rédiger la documentation en markdown
