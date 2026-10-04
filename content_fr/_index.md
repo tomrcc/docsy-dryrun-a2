@@ -11,7 +11,7 @@ menu:
 params: {}
 content_blocks:
   - _name: blocks/cover
-    title: Bienvenue sur le Docsy Starter TE$T TOM
+    title: Bienvenue sur le Docsy Starter TE$T TOM cba
     subtitle:
     description: Une documentation que toute votre équipe peut modifier —
       directement dans la page, dans CloudCannon.
