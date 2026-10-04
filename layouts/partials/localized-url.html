@@ -1,0 +1,7 @@
+{{/* Resolves an internal link field to the page in the current language,
+falling back to the default language when there's no translation. External
+URLs and image paths pass through relURL unchanged.
+Call: {{ $href := partial "localized-url.html" .url }} */ -}}
+{{- $href := . | relURL -}}
+{{- with and . (not (urls.Parse .).IsAbs) (site.GetPage .) }}{{ $href = .RelPermalink }}{{ end -}}
+{{- return $href -}}

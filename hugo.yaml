@@ -21,9 +21,29 @@ imaging:
 languages:
   en:
     label: English
+    weight: 1
+    contentDir: content
     title: Docsy Starter
     params:
       description: A Docsy documentation site, ready to edit in CloudCannon
+  fr:
+    label: Français
+    weight: 2
+    contentDir: content_fr
+    title: Docsy Starter
+    params:
+      description: Un site de documentation Docsy, prêt à être modifié dans CloudCannon
+      taxonomy:
+        taxonomyCloudTitle: [Nuage de tags, Catégories]
+  de:
+    label: Deutsch
+    weight: 3
+    contentDir: content_de
+    title: Docsy Starter
+    params:
+      description: Eine Docsy-Dokumentationsseite, bereit zur Bearbeitung in CloudCannon
+      taxonomy:
+        taxonomyCloudTitle: [Schlagwortwolke, Kategorien]
 
 markup:
   goldmark:

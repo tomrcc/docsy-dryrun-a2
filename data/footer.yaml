@@ -1,4 +1,11 @@
 # Footer text. Edit it in CloudCannon under Site data → Footer.
-copyright_authors: The Docsy Starter Authors
+# The start year and privacy link are shared; the copyright holder has one
+# value per language.
 copyright_from_year: "2026"
 privacy_policy_url: /privacy/
+en:
+  copyright_authors: The Docsy Starter Authors
+fr:
+  copyright_authors: Les auteurs du Docsy Starter
+de:
+  copyright_authors: Die Autoren des Docsy Starter

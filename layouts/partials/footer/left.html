@@ -1,2 +1,3 @@
 {{/* Overrides Docsy's footer/left.html: user links come from data/links.yaml. */ -}}
-{{ partial "footer/editable-links.html" (dict "links" (hugo.Data.links.user | default slice) "prop" "@data[links].user") -}}
+{{ $d := partial "lang-data.html" "links" -}}
+{{ partial "footer/editable-links.html" (dict "links" ($d.data.user | default slice) "prop" (printf "%s.user" $d.prop)) -}}

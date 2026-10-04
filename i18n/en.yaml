@@ -1,4 +1,15 @@
-# Docsy's own strings come from the theme. Strings used by the page-builder
-# block partials are repeated here: CloudCannon's Visual Editor bundles the
-# project's i18n/ but not the theme's (the theme isn't vendored).
+# Interface text. These override Docsy's own strings key by key; any key not
+# listed here still comes from the theme. Edit them in CloudCannon under
+# Site data → UI strings. Changes show after the next build.
+# ui_read_more is also used by the page-builder block partials: CloudCannon's
+# Visual Editor bundles the project's i18n/ but not the theme's.
 ui_read_more: Read more
+ui_search: Search this site…
+ui_pager_prev: Previous
+ui_pager_next: Next
+footer_all_rights_reserved: All Rights Reserved
+footer_privacy_policy: Privacy Policy
+post_byline_by: By
+post_last_mod: Last modified
+toc_on_this_page: On this page
+print_entire_section: Print entire section

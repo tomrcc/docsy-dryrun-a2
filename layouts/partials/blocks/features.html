@@ -10,7 +10,7 @@ Docsy's blocks/section + blocks/feature shortcode pair. `.` is the block. */ -}}
         <h4 class="h3" data-editable="text" data-type="span" data-prop="title">{{ .title }}</h4>
         <div class="mb-0" data-editable="text" data-type="block" data-prop="content">{{ .content | markdownify }}</div>
         {{ with $feature.url -}}
-        <p><a href="{{ . | relURL }}">{{ $feature.url_text | default (T "ui_read_more") }}</a></p>
+        <p><a href="{{ partial "localized-url.html" . }}">{{ $feature.url_text | default (T "ui_read_more") }}</a></p>
         {{- end }}
       </div>
       {{- end }}

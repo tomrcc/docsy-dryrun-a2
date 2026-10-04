@@ -1,0 +1,12 @@
+{{/* Reads a data file keyed by language (en:, fr:, de:), falling back to the
+default language. Returns the language's section and the editable-region prop
+that points at it.
+Call: {{ $d := partial "lang-data.html" "footer" }} */ -}}
+{{- $all := index hugo.Data . | default dict -}}
+{{- $key := site.Language.Lang -}}
+{{- $data := index $all $key -}}
+{{- if not $data -}}
+  {{- $key = hugo.Sites.Default.Language.Lang -}}
+  {{- $data = index $all $key | default dict -}}
+{{- end -}}
+{{- return (dict "data" $data "prop" (printf "@data[%s].%s" . $key)) -}}

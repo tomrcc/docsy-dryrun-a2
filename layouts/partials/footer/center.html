@@ -1,6 +1,8 @@
 {{/* Overrides Docsy's footer/center.html: copyright and privacy link come
-from data/footer.yaml so editors can change them. */ -}}
+from data/footer.yaml so editors can change them. The copyright holder is
+keyed by language (see partials/lang-data.html). */ -}}
 {{ $footer := hugo.Data.footer | default dict -}}
+{{ $d := partial "lang-data.html" "footer" -}}
 {{ $fromYear := strings.TrimSpace (string ($footer.copyright_from_year | default "")) -}}
 {{ $toYear := string now.Year -}}
 <span class="td-footer__copyright">&copy;
@@ -8,8 +10,8 @@ from data/footer.yaml so editors can change them. */ -}}
     {{ if ne . $toYear }}{{ . }}&ndash;{{ end -}}
   {{ end -}}
   {{ $toYear }}
-  <span class="td-footer__authors" data-editable="text" data-type="text" data-prop="@data[footer].copyright_authors">
-    {{- $footer.copyright_authors | default (printf "%s Authors" site.Title) | markdownify -}}
+  <span class="td-footer__authors" data-editable="text" data-type="text" data-prop="{{ $d.prop }}.copyright_authors">
+    {{- $d.data.copyright_authors | default (printf "%s Authors" site.Title) | markdownify -}}
   </span>
 </span>
 {{- with T "footer_all_rights_reserved" }}
@@ -17,7 +19,7 @@ from data/footer.yaml so editors can change them. */ -}}
 {{- end }}
 
 {{ with $footer.privacy_policy_url -}}
-  <span class="ms-2"><a href="{{ . | relURL }}">{{ T "footer_privacy_policy" }}</a></span>
+  <span class="ms-2"><a href="{{ partial "localized-url.html" . }}">{{ T "footer_privacy_policy" }}</a></span>
 {{- end -}}
 
 {{ if site.Params.ui.footer_about_enable -}}

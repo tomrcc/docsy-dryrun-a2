@@ -8,6 +8,18 @@ Welcome! This is a documentation site with a blog and a few landing pages. Every
 - [Docs](cloudcannon:collections/docs) — the documentation
 - [Blog](cloudcannon:collections/blog) — news and release posts
 - [Site data](cloudcannon:collections/data) — the footer, community links, and the tags and categories you can pick
+- [UI strings](cloudcannon:collections/ui_strings) — interface text such as "Read more" and the search box, in each language
+
+## Languages
+
+The site is in English, French and German. English pages are at the root (`/about/`); French and German pages are under `/fr/` and `/de/` (`/fr/about/`). Each language has its own **Pages**, **Docs** and **Blog** collections, under the **Français** and **Deutsch** headings in the sidebar.
+
+- **A translation is the file at the same path in the other language's collection.** Nothing else links them, so keep the file name and folder the same. Don't change a translation's slug.
+- Every page already has a French and a German copy. Copies that haven't been translated yet are still in English: translate them in place.
+- **When you add a page**, add it to each language's collection at the same path, or that language won't have the page.
+- **Footer** and **Links** under Site data have an English, Français and Deutsch section. Each language's links list is separate, so when you add or remove a link, do it in every language.
+- **UI strings** has one file per language (`en.yaml`, `fr.yaml`, `de.yaml`). Changes show after the site rebuilds, not live in the Visual Editor.
+- Some interface text comes from the Docsy theme and stays in English on French and German pages: the "Tags:" and "Categories:" labels, and the dates on the blog list.
 
 ## Pages
 

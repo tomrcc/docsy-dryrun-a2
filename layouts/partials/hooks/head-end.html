@@ -1,3 +1,12 @@
 {{/* Docsy calls this hook at the end of <head> on every layout.
 CloudCannon's editable regions: loads only inside the Visual Editor. */ -}}
 {{ partial "editable-regions" . }}
+{{/* hreflang alternates for pages with translations. */ -}}
+{{ if .IsTranslated -}}
+  {{ range .AllTranslations -}}
+    <link rel="alternate" hreflang="{{ .Language.Lang }}" href="{{ .Permalink }}">
+    {{ if eq .Language.Lang hugo.Sites.Default.Language.Lang -}}
+      <link rel="alternate" hreflang="x-default" href="{{ .Permalink }}">
+    {{ end -}}
+  {{ end -}}
+{{ end -}}

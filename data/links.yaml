@@ -1,28 +1,85 @@
 # Community links. Shown as icons in the footer and as lists on the
 # Community page. Edit them in CloudCannon under Site data → Links.
-user:
-  - name: User mailing list
-    url: https://example.org/mail
-    icon: fa-solid fa-envelope
-    desc: Discussion and help from your fellow users
-  - name: Stack Overflow
-    url: https://example.org/stack
-    icon: fa-brands fa-stack-overflow
-    desc: Practical questions and curated answers
-  - name: Mastodon
-    url: https://example.org/mastodon
-    icon: fa-brands fa-mastodon
-    desc: Follow us for the latest news
-developer:
-  - name: GitHub
-    url: https://github.com/example/docsy-starter
-    icon: fa-brands fa-github
-    desc: Development takes place here
-  - name: Slack
-    url: https://example.org/slack
-    icon: fa-brands fa-slack
-    desc: Chat with other project developers
-  - name: Developer mailing list
-    url: https://example.org/mail
-    icon: fa-solid fa-envelope
-    desc: Discuss development issues around the project
+# Each language has its own copy of the lists: keep the URLs and icons in
+# step when you add or remove a link.
+en:
+  user:
+    - name: User mailing list
+      url: https://example.org/mail
+      icon: fa-solid fa-envelope
+      desc: Discussion and help from your fellow users
+    - name: Stack Overflow
+      url: https://example.org/stack
+      icon: fa-brands fa-stack-overflow
+      desc: Practical questions and curated answers
+    - name: Mastodon
+      url: https://example.org/mastodon
+      icon: fa-brands fa-mastodon
+      desc: Follow us for the latest news
+  developer:
+    - name: GitHub
+      url: https://github.com/example/docsy-starter
+      icon: fa-brands fa-github
+      desc: Development takes place here
+    - name: Slack
+      url: https://example.org/slack
+      icon: fa-brands fa-slack
+      desc: Chat with other project developers
+    - name: Developer mailing list
+      url: https://example.org/mail
+      icon: fa-solid fa-envelope
+      desc: Discuss development issues around the project
+fr:
+  user:
+    - name: Liste de diffusion des utilisateurs
+      url: https://example.org/mail
+      icon: fa-solid fa-envelope
+      desc: Échanges et aide entre utilisateurs
+    - name: Stack Overflow
+      url: https://example.org/stack
+      icon: fa-brands fa-stack-overflow
+      desc: Questions pratiques et réponses sélectionnées
+    - name: Mastodon
+      url: https://example.org/mastodon
+      icon: fa-brands fa-mastodon
+      desc: Suivez-nous pour les dernières nouvelles
+  developer:
+    - name: GitHub
+      url: https://github.com/example/docsy-starter
+      icon: fa-brands fa-github
+      desc: C'est ici que se passe le développement
+    - name: Slack
+      url: https://example.org/slack
+      icon: fa-brands fa-slack
+      desc: Discutez avec les autres développeurs du projet
+    - name: Liste de diffusion des développeurs
+      url: https://example.org/mail
+      icon: fa-solid fa-envelope
+      desc: Discutez des questions de développement du projet
+de:
+  user:
+    - name: Mailingliste für Nutzer
+      url: https://example.org/mail
+      icon: fa-solid fa-envelope
+      desc: Austausch und Hilfe unter Nutzern
+    - name: Stack Overflow
+      url: https://example.org/stack
+      icon: fa-brands fa-stack-overflow
+      desc: Praktische Fragen und ausgewählte Antworten
+    - name: Mastodon
+      url: https://example.org/mastodon
+      icon: fa-brands fa-mastodon
+      desc: Folgen Sie uns für die neuesten Nachrichten
+  developer:
+    - name: GitHub
+      url: https://github.com/example/docsy-starter
+      icon: fa-brands fa-github
+      desc: Hier findet die Entwicklung statt
+    - name: Slack
+      url: https://example.org/slack
+      icon: fa-brands fa-slack
+      desc: Chatten Sie mit anderen Entwicklern des Projekts
+    - name: Mailingliste für Entwickler
+      url: https://example.org/mail
+      icon: fa-solid fa-envelope
+      desc: Diskutieren Sie Entwicklungsfragen rund um das Projekt

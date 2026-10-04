@@ -31,7 +31,7 @@ and buttons. Adapted from Docsy's blocks/cover shortcode. `.` is the block. */ -
           {{ if or .buttons site.Params.ENV_CLIENT -}}
           <div class="td-cta-buttons my-5" data-editable="array" data-prop="buttons">
             {{- range .buttons }}
-            <a class="btn btn-lg btn-{{ .color | default "primary" }} me-3 mb-4" href="{{ .url | relURL }}" data-editable="array-item"
+            <a class="btn btn-lg btn-{{ .color | default "primary" }} me-3 mb-4" href="{{ partial "localized-url.html" .url }}" data-editable="array-item"
               {{- if .new_tab }} target="_blank" rel="noopener noreferrer"{{ end }}>
               <span data-editable="text" data-type="span" data-prop="text">{{ .text }}</span>
               {{- with .icon }} <i class="{{ . }} ms-2"></i>{{ end }}

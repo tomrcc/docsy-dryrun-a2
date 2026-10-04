@@ -5,7 +5,7 @@ array region. Called with (dict "links" <array> "prop" "@data[links].user"). */ 
   {{ $url := .url -}}
   {{ $isExternal := (urls.Parse $url).IsAbs -}}
   <li title="{{ .name }}" data-editable="array-item">
-    <a href="{{ $url | relURL }}"{{ if $isExternal }} target="_blank" rel="noopener"{{ end }}><i class="{{ .icon }}"></i> <span data-editable="text" data-type="span" data-prop="name">{{ .name }}</span></a>:
+    <a href="{{ partial "localized-url.html" $url }}"{{ if $isExternal }} target="_blank" rel="noopener"{{ end }}><i class="{{ .icon }}"></i> <span data-editable="text" data-type="span" data-prop="name">{{ .name }}</span></a>:
     <span data-editable="text" data-type="span" data-prop="desc">{{ .desc }}</span>
   </li>
 {{- end }}

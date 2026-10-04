@@ -39,14 +39,25 @@ markdown:
       img: none
 
 collection_groups:
-  - heading: Content
+  - heading: English
     collections:
       - pages
       - docs
       - blog
+  - heading: Français
+    collections:
+      - pages_fr
+      - docs_fr
+      - blog_fr
+  - heading: Deutsch
+    collections:
+      - pages_de
+      - docs_de
+      - blog_de
   - heading: Site data
     collections:
       - data
+      - ui_strings
 
 collections_config:
   pages:
@@ -180,6 +191,254 @@ collections_config:
     disable_add_folder: true
     disable_file_actions: true
 
+  # Français: content_fr/ mirrors content/ path for path. A translation is
+  # the file at the same path here; keep slugs and file names the same.
+  pages_fr:
+    name: Pages (Français)
+    path: content_fr
+    glob:
+      - '**/*.md'
+      - '!docs/**'
+      - '!blog/**'
+      - '!search.md'
+    url: /fr/[full_slug]/
+    icon: wysiwyg
+    description: The Français home page, landing pages and standalone pages.
+    _enabled_editors:
+      - visual
+      - content
+      - data
+    schemas:
+      default:
+        path: .cloudcannon/schemas/landing.md
+        name: Landing page
+        icon: dashboard
+        new_preview_url: /fr/about/
+        _enabled_editors:
+          - visual
+          - data
+      page:
+        path: .cloudcannon/schemas/page.md
+        name: Text page
+        icon: article
+        new_preview_url: /fr/privacy/
+    add_options:
+      - name: Landing page
+        schema: default
+        icon: dashboard
+      - name: Text page
+        schema: page
+        icon: article
+    create:
+      path: '[relative_base_path]/{title|slugify}.[ext]'
+
+  docs_fr:
+    name: Docs (Français)
+    path: content_fr/docs
+    url: /fr/docs/[full_slug]/
+    icon: docs
+    description: The Français documentation pages.
+    _enabled_editors:
+      - visual
+      - content
+      - data
+    schemas:
+      default:
+        path: .cloudcannon/schemas/doc.md
+        name: Docs page
+        icon: description
+        new_preview_url: /fr/docs/overview/
+      section:
+        path: .cloudcannon/schemas/doc-section.md
+        name: Docs section
+        icon: folder
+        new_preview_url: /fr/docs/reference/
+        create:
+          path: '[relative_base_path]/{title|slugify}/_index.[ext]'
+    add_options:
+      - name: Docs page
+        schema: default
+        icon: description
+      - name: Docs section
+        schema: section
+        icon: folder
+    create:
+      path: '[relative_base_path]/{title|slugify}.[ext]'
+    sort_options:
+      - key: weight
+        order: ascending
+      - key: title
+        order: ascending
+
+  blog_fr:
+    name: Blog (Français)
+    path: content_fr/blog
+    url: /fr/blog/[full_slug]/
+    icon: event_available
+    description: The Français blog posts. Images stay in the English post's folder unless a translation needs its own.
+    _enabled_editors:
+      - content
+      - visual
+      - data
+    schemas:
+      default:
+        path: .cloudcannon/schemas/post.md
+        name: Blog post
+        icon: event_available
+        new_preview_url: /fr/blog/news/second-post/
+      section:
+        path: .cloudcannon/schemas/blog-section.md
+        name: Blog section
+        icon: folder
+        create:
+          path: '[relative_base_path]/{title|slugify}/_index.[ext]'
+    add_options:
+      - name: Blog post
+        schema: default
+        icon: event_available
+        editor: content
+    create:
+      path: '[relative_base_path]/{title|slugify}/index.[ext]'
+    sort_options:
+      - key: date
+        order: descending
+    _editables:
+      content:
+        paths:
+          uploads: content_fr/blog/[relative_base_path]
+          uploads_use_relative_path: true
+
+  # Deutsch: content_de/ mirrors content/ path for path. A translation is
+  # the file at the same path here; keep slugs and file names the same.
+  pages_de:
+    name: Pages (Deutsch)
+    path: content_de
+    glob:
+      - '**/*.md'
+      - '!docs/**'
+      - '!blog/**'
+      - '!search.md'
+    url: /de/[full_slug]/
+    icon: wysiwyg
+    description: The Deutsch home page, landing pages and standalone pages.
+    _enabled_editors:
+      - visual
+      - content
+      - data
+    schemas:
+      default:
+        path: .cloudcannon/schemas/landing.md
+        name: Landing page
+        icon: dashboard
+        new_preview_url: /de/about/
+        _enabled_editors:
+          - visual
+          - data
+      page:
+        path: .cloudcannon/schemas/page.md
+        name: Text page
+        icon: article
+        new_preview_url: /de/privacy/
+    add_options:
+      - name: Landing page
+        schema: default
+        icon: dashboard
+      - name: Text page
+        schema: page
+        icon: article
+    create:
+      path: '[relative_base_path]/{title|slugify}.[ext]'
+
+  docs_de:
+    name: Docs (Deutsch)
+    path: content_de/docs
+    url: /de/docs/[full_slug]/
+    icon: docs
+    description: The Deutsch documentation pages.
+    _enabled_editors:
+      - visual
+      - content
+      - data
+    schemas:
+      default:
+        path: .cloudcannon/schemas/doc.md
+        name: Docs page
+        icon: description
+        new_preview_url: /de/docs/overview/
+      section:
+        path: .cloudcannon/schemas/doc-section.md
+        name: Docs section
+        icon: folder
+        new_preview_url: /de/docs/reference/
+        create:
+          path: '[relative_base_path]/{title|slugify}/_index.[ext]'
+    add_options:
+      - name: Docs page
+        schema: default
+        icon: description
+      - name: Docs section
+        schema: section
+        icon: folder
+    create:
+      path: '[relative_base_path]/{title|slugify}.[ext]'
+    sort_options:
+      - key: weight
+        order: ascending
+      - key: title
+        order: ascending
+
+  blog_de:
+    name: Blog (Deutsch)
+    path: content_de/blog
+    url: /de/blog/[full_slug]/
+    icon: event_available
+    description: The Deutsch blog posts. Images stay in the English post's folder unless a translation needs its own.
+    _enabled_editors:
+      - content
+      - visual
+      - data
+    schemas:
+      default:
+        path: .cloudcannon/schemas/post.md
+        name: Blog post
+        icon: event_available
+        new_preview_url: /de/blog/news/second-post/
+      section:
+        path: .cloudcannon/schemas/blog-section.md
+        name: Blog section
+        icon: folder
+        create:
+          path: '[relative_base_path]/{title|slugify}/_index.[ext]'
+    add_options:
+      - name: Blog post
+        schema: default
+        icon: event_available
+        editor: content
+    create:
+      path: '[relative_base_path]/{title|slugify}/index.[ext]'
+    sort_options:
+      - key: date
+        order: descending
+    _editables:
+      content:
+        paths:
+          uploads: content_de/blog/[relative_base_path]
+          uploads_use_relative_path: true
+
+  ui_strings:
+    name: UI strings
+    path: i18n
+    glob:
+      - '*.yaml'
+    disable_url: true
+    icon: translate
+    description: Interface text (buttons, footer labels, search box) in each language. Changes show after the next build.
+    _enabled_editors:
+      - data
+    disable_add: true
+    disable_add_folder: true
+    disable_file_actions: true
+
 data_config:
   links:
     path: data/links.yaml
@@ -217,6 +476,15 @@ file_config:
         options:
           preview:
             icon: link
+      en:
+        type: object
+        label: English
+      fr:
+        type: object
+        label: Français
+      de:
+        type: object
+        label: Deutsch
       user:
         type: array
         label: User links
@@ -237,6 +505,15 @@ file_config:
         options:
           preview:
             icon: bottom_navigation
+      en:
+        type: object
+        label: English
+      fr:
+        type: object
+        label: Français
+      de:
+        type: object
+        label: Deutsch
       copyright_authors:
         type: text
         label: Copyright holder
@@ -249,6 +526,40 @@ file_config:
         type: url
         label: Privacy policy link
         comment: Leave empty to hide the link.
+  - glob: i18n/*.yaml
+    _inputs:
+      ui_read_more:
+        type: text
+        label: Read more link
+        comment: The default link text on features, and the cover block's down-arrow label.
+      ui_search:
+        type: text
+        label: Search box placeholder
+      ui_pager_prev:
+        type: text
+        label: Previous page link
+      ui_pager_next:
+        type: text
+        label: Next page link
+      footer_all_rights_reserved:
+        type: text
+        label: All rights reserved (footer)
+      footer_privacy_policy:
+        type: text
+        label: Privacy policy link (footer)
+      post_byline_by:
+        type: text
+        label: Byline "By"
+        comment: Shown before the author's name on blog posts.
+      post_last_mod:
+        type: text
+        label: Last modified
+      toc_on_this_page:
+        type: text
+        label: Table of contents heading
+      print_entire_section:
+        type: text
+        label: Print entire section link
 
 _inputs:
   title:

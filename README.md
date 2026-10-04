@@ -38,6 +38,10 @@ npm run serve
 | `layouts/_td-content.html`, `docs/list.html`, `blog/_td-content.html` | Overrides of Docsy templates adding editable regions to the title, description and body |
 | `static/images/` | Uploaded images (mounted into `assets/` too, so the cover block can resize them) |
 | `cloudcannon.config.yml`, `.cloudcannon/` | CloudCannon collections, schemas, block structures and snippets |
+| `content_fr/`, `content_de/` | French and German content, one file per English file at the same path (Hugo `contentDir` per language in `hugo.yaml`) |
+| `i18n/` | Interface strings per language; these override Docsy's keys one by one |
+| `layouts/partials/lang-data.html`, `localized-url.html` | Read a `data/` file keyed by language; resolve a link field to the current language's page |
+| `layouts/partials/search-input.html`, `assets/json/offline-search-index.json` | Overrides of Docsy's offline search: one index per language |
 
 Partials live in `layouts/partials/` (not Hugo's newer `layouts/_partials/`):
 CloudCannon's editable-regions module bundles that directory for the Visual
@@ -50,7 +54,14 @@ npm run update:docsy
 ```
 
 After an update, compare the overridden Docsy files listed above with their new
-versions in the theme.
+versions in the theme. The search override was copied from Docsy
+v0.17.1-0.20260831231032-2c44726e7773; find the theme's copy with
+`hugo config mounts` and diff, for example:
+
+```sh
+diff <docsy-dir>/layouts/_partials/search-input.html layouts/partials/search-input.html
+diff <docsy-dir>/assets/json/offline-search-index.json assets/json/offline-search-index.json
+```
 
 ## License
 
