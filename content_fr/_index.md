@@ -62,6 +62,11 @@ content_blocks:
           *Site data*, pour que toutes les pages restent cohérentes.
         url: /docs/reference/
         url_text: Ce que vous pouvez modifier
+      - title: FRENCH title
+        icon: fa-solid fa-rocket
+        content: A F$EENCH sentence about this feature.
+        url: /
+        url_text: ''
   - _name: blocks/section
     content: Ajoutez un autre bloc avec le bouton **\+** sous celui-ci.
     color: white
